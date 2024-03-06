@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorteador de Jogadores</title>
+    <style>
+        body {
+            font-family: "Century Gothic", sans-serif;
+            text-align: center;
+            margin: 40; /* Remova a margem para ocupar toda a largura e altura da página */
+            height: 100vh; /* 100% da altura da viewport */
+            background: steelblue; /* Gradiente linear do cadetblue para steelblue */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10%;
+            margin-top: 10px;
+        }
+
+        h2, h3, h4{
+            margin: 25px;
+            font-family: Arial, Helvetica, sans-serif;
+            size: 20px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px; /* Adicione esta propriedade para tornar o botão mais redondo */
+            background-color: blue; /* Cor de fundo azul */
+            color: white; /* Texto branco */
+            font-family: Arial, Helvetica, sans-serif
+        }
+        
+        #Ea {
+            size: 100px;
+        }
+    
+        #logo {
+            max-width: 100px;  /* Ajuste este valor conforme necessário */
+            max-height: 100px;  /* Ajuste este valor conforme necessário */
+            margin: 5px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <img src="Logo.png" alt="logo" style="width: 300px; height: auto;">
+
+    <h1 style="font-size: 50px;">Sorteador de jogadores da Premier League do</h1>
+
+    <img src="image-removebg-preview.png" alt="Ea logo" style="width: 300px; height: auto;">
+
+    
+
+    <img id="playerImage" style="width: 250px; height: auto;" src="homem_misterioso.png" >
+<h2 id="playerName" style="font-size: 30px;">Nome do Jogador</h2>    
+<h3 id="clubName" style="font-size: 30px;">Clube do Jogador</h3>
+<h4 id="overall" style="font-size: 30px;">Overall</h4>
+<h5 id="position" style="font-size: 30px;">Posição Inicial</h5>
+    
+<button onclick="sortearJogador()" style="font-size: 20px;">SORTEAR JOGADOR</button>
+
+<script>
+    const jogadores = [
+    { nome: "Erling Haaland", clube: "Manchester City", imagem: "haaland.png", overall: 91, position: "Atacante" },
+  { nome: "Kevin De Bruyne", clube: "Manchester City", imagem: "kdb.png", overall: 91, position: "Meio-campista" },
+  { nome: "Rúben Dias", clube: "Manchester City", imagem: "RubenD.png", overall: 89, position: "Zagueiro" },
+  { nome: "Rodri", clube: "Manchester City", imagem: "Rodri.png", overall: 89, position: "Volante" },
+  { nome: "Alisson", clube: "Liverpool", imagem: "Alisson.png", overall: 89, position: "Goleiro" },
+  { nome: "Mohamed Salah", clube: "Liverpool", imagem: "Salah.png", overall: 89, position: "Ponta Direita" },
+  { nome: "Virgil van Dijk", clube: "Liverpool", imagem: "VVD.png", overall: 89, position: "Zagueiro" },
+  { nome: "Casemiro", clube: "Manchester United", imagem: "Caze.png", overall: 89, position: "Volante" },
+  { nome: "Bernardo Silva", clube: "Manchester City", imagem: "BS.png", overall: 88, position: "Meio-Campista" },
+  { nome: "Bruno Fernandes", clube: "Manchester United", imagem: "BF.png", overall: 88, position: "Meia-Campista-Ofensivo" },
+  { nome: "Ederson", clube: "Manchester City", imagem: "Ederson.png", overall: 88, position: "Goleiro" },
+  { nome: "Martin Ødegaard", clube: "Arsenal", imagem: "Odegaard.png", overall: 87, position: "Meia-Campista-Ofensivo" },
+  { nome: "Heung Min Son", clube: "Tottenham Hotspur", imagem: "Son.png", overall: 87, position: "Ponta Esquerda" },
+  { nome: "Bukayo Saka", clube: "Arsenal", imagem: "Saka.png", overall: 86, position: "Ponta Direita" },
+  { nome: "Sandro Tonali", clube: "Newcastle United", imagem: "Tonali.png", overall: 86, position: "Volante" },
+  { nome: "Christopher Nkunku", clube: "Chelsea", imagem: "Nkunku.png", overall: 86, position: "Atacante" },
+  { nome: "Trent Alexander-Arnold", clube: "Liverpool", imagem: "TAA.png", overall: 86, position: "Lateral Direito" },
+  { nome: "Andrew Robertson", clube: "Liverpool", imagem: "Robertson.png", overall: 86, position: "Lateral Esquerdo" },
+  { nome: "Bruno Guimarães", clube: "Newcastle United", imagem: "BrunoG.png", overall: 85, position: "Meio-Campista" },
+  { nome: "Phil Foden", clube: "Manchester City", imagem: "Foden.png", overall: 85, position: "Ponta Esquerda" },
+  { nome: "Declan Rice", clube: "Arsenal", imagem: "Rice.png", overall: 85, position: "Volante" },
+  { nome: "Marcus Rashford", clube: "Manchester United", imagem: "Rashford.png", overall: 85, position: "Atacante" },
+  { nome: "André Onana", clube: "Manchester United", imagem: "Onana.png", overall: 85, position: "Goleiro" },
+  { nome: "Diogo Jota", clube: "Liverpool", imagem: "Jota.png", overall: 85, position: "Atacante" },
+  { nome: "Thomas Partey", clube: "Arsenal", imagem: "Partey.png", overall: 85, position: "Volante" },
+  { nome: "Jack Grealish", clube: "Manchester City", imagem: "Grealish.png", overall: 85, position: "Ponta-Esquerda" },
+  { nome: "John Stones", clube: "Manchester City", imagem: "Stones.png", overall: 86, position: "Zagueiro" },
+  { nome: "Emiliano Martínez", clube: "Aston Villa", imagem: "Martinez.png", overall: 85, position: "Goleiro" },
+  { nome: "Raphaël Varane", clube: "Tottenham Hotspur", imagem: "Varane.png", overall: 85, position: "Zagueiro" },
+  { nome: "Kieran Trippier", clube: "Newcastle United", imagem: "Trippier.png", overall: 85, position: "Lateral Direito" },
+  { nome: "Sven Botman", clube: "Newcastle United", imagem: "Botman.png", overall: 84, position: "Zagueiro" },
+  { nome: "Gabriel Martinelli", clube: "Arsenal", imagem: "Martinelli.png", overall: 84, position: "Ponta Esquerda" },
+  { nome: "Moussa Diaby", clube: "Aston Villa", imagem: "Diaby.png", overall: 84, position: "Meia Direita" },
+  { nome: "Luis Díaz", clube: "Liverpool", imagem: "LuisDiaz.png", overall: 84, position: "Ponta Esquerda" },
+  { nome: "Lisandro Martínez", clube: "Manchester United", imagem: "lisandromartinez.png", overall: 84, position: "Zagueiro" },
+  { nome: "Reece James", clube: "Chelsea", imagem: "ReeceJames.png", overall: 84, position: "Lateral Direito" },
+  { nome: "Aaron Ramsdale", clube: "Arsenal", imagem: "Ramsdale.png", overall: 84, position: "Goleiro" },
+  { nome: "Gabriel", clube: "Arsenal", imagem: "Gabriel.png", overall: 84, position: "Zagueiro" },
+  { nome: "Gabriel Jesus", clube: "Arsenal", imagem: "Gabrieljesus.png", overall: 84, position: "Atacante Direito" },
+  { nome: "James Maddison", clube: "Tottenham Hotspur", imagem: "Maddison.png", overall: 84, position: "Meia Central" },
+  { nome: "Pierre-Emile Højbjerg", clube: "Tottenham Hotspur", imagem: "Hojbjerg.png", overall: 84, position: "Volante" },
+  { nome: "Nick Pope", clube: "Newcastle United", imagem: "Pope.png", overall: 84, position: "Goleiro" },
+  { nome: "Thiago", clube: "Liverpool", imagem: "Thiago.png", overall: 84, position: "Meia Central" },
+  { nome: "Kyle Walker", clube: "Manchester City", imagem: "Walker.png", overall: 84, position: "Lateral Direito" },
+  { nome: "Thiago Silva", clube: "Chelsea", imagem: "ThiagoSilva.png", overall: 84, position: "Zagueiro" },
+  { nome: "Enzo Fernández", clube: "Chelsea", imagem: "EnzoFernandez.png", overall: 83, position: "Meia Central" },
+  { nome: "Cody Gakpo", clube: "Liverpool", imagem: "Gakpo.png", overall: 83, position: "Atacante" },
+  { nome: "Pau Torres", clube: "Aston Villa", imagem: "PauTorres.png", overall: 83, position: "Zagueiro" },
+  { nome: "Palhinha", clube: "Fulham", imagem: "Palhinha.png", overall: 83, position: "Volante" },
+  { nome: "Luke Shaw", clube: "Manchester United", imagem: "LukeShaw.png", overall: 83, position: "Lateral Esquerdo" },
+  { nome: "Jorginho", clube: "Arsenal", imagem: "Jorginho.png", overall: 83, position: "Volante" },
+  { nome: "Raheem Sterling", clube: "Chelsea", imagem: "Sterling.png", overall: 83, position: "Ponta Esquerda" },
+  { nome: "Christian Eriksen", clube: "Manchester United", imagem: "Eriksen.png", overall: 83, position: "Meia Central" },
+  { nome: "Hugo Lloris", clube: "Tottenham Hotspur", imagem: "Lloris.png", overall: 83, position: "Goleiro" },
+  { nome: "Antony", clube: "Manchester United", imagem: "Antony.png", overall: 82, position: "Atacante" },
+  { nome: "Darwin Núñez", clube: "Liverpool", imagem: "DarwinNunez.png", overall: 82, position: "Atacante" },
+  { nome: "Joško Gvardiol", clube: "Manchester City", imagem: "Gvardiol.png", overall: 82, position: "Zagueiro" },
+  { nome: "Guglielmo Vicario", clube: "Tottenham Hotspur", imagem: "Vicario.png", overall: 82, position: "Goleiro" },
+  { nome: "Alexis Mac Allister", clube: "Liverpool", imagem: "MacAllister.png", overall: 82, position: "Meia Central" },
+        
+        // Adicione mais jogadores conforme necessário
+    ];
+
+    function sortearJogador() {
+        const jogadorSorteado = jogadores[Math.floor(Math.random() * jogadores.length)];
+        document.getElementById('playerImage').src = jogadorSorteado.imagem;
+        document.getElementById('playerName').innerText = jogadorSorteado.nome;
+        document.getElementById('clubName').innerText = jogadorSorteado.clube;
+        document.getElementById('overall').innerText = `Overall: ${jogadorSorteado.overall}`;
+        document.getElementById('position').innerText = `Posição: ${jogadorSorteado.position}`;
+        }
+    </script>
+
+</body>
+</html>
+
